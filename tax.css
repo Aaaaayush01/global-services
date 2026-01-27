@@ -1,0 +1,1021 @@
+/* tax.css — Premium theme with Manpower-style hero + full-page styles
+   Rewritten/cleaned to match manpower hero layout and 40-client grid
+*/
+
+/* -------------------- :root palette & layout -------------------- */
+:root {
+  --bg-dark: #0d1720;
+  --bg: #ffffff;
+  --section: #f6fbff;
+  --muted: #6b7280;
+  --text: #0f1724;
+  --teal: #14b8a6;
+  --sky: #0ea5e9;
+  --accent-gradient: linear-gradient(90deg, var(--sky), var(--teal));
+
+  --container: 1200px;
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --card-shadow: 0 12px 40px rgba(2, 6, 23, 0.06);
+  --ease: 300ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+/* -------------------- reset & base -------------------- */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+body a {
+  text-decoration: none;
+}
+
+body p {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 92%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* Trust Bar Styles */
+.trust-bar {
+  background: #f0f9ff; /* Very light sky blue */
+  border-bottom: 1px solid #e0f2fe;
+  padding: 8px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0369a1;
+}
+
+.trust-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trust-item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.trust-icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 3px;
+}
+
+/* Hide location on small mobiles to prevent crowding */
+@media (max-width: 600px) {
+  .hide-mobile {
+    display: none;
+  }
+  .trust-flex {
+    justify-content: center;
+    gap: 20px;
+  }
+}
+/* -------------------- header -------------------- */
+.site-header {
+  background-color: white;
+  position: relative;
+  top: 0;
+  z-index: 1000;
+  padding: 0.75rem 0;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.brand-block {
+  display: flex;
+  align-items: center;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.globallogo {
+  width: 58px;
+  height: auto;
+  object-fit: contain;
+}
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+.brand-main {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: rgb(4, 71, 119);
+  letter-spacing: -0.02em;
+}
+.brand-gradient {
+  font-size: 1rem;
+  /* UPDATED: Use the defined theme colors for consistency */
+  background: var(--accent-gradient); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+/* navigation links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.nav-link {
+  color: rgb(4, 71, 119);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--sky);
+}
+.btn.btn-primary {
+  background: var(--accent-gradient);
+  color: #fff;
+  padding: 0.55rem 0.95rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: background 0.25s, transform 0.15s;
+}
+.btn.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+/* mobile toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.nav-toggle .bar {
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* mobile behavior */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 1.2rem;
+    flex-direction: column;
+    background: var(--bg-dark);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 16px 40px rgba(2, 6, 23, 0.3);
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+/* -------------------- HERO (manpower-style) -------------------- */
+.hero {
+  padding: 3.5rem 0;
+}
+.hero-section-bg {
+  background: var(--bg-dark);
+  color: #fff;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+@media (min-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.25rem;
+  }
+}
+
+/* image */
+/* ---------- hero image: robust, cover-fit, fallback ---------- */
+
+/* container ensures left card keeps the premium rounded look */
+.hero-image {
+  position: relative;
+  min-height: 420px; /* ensures visible card height on desktop */
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-lg); /* matches premium card corners */
+}
+
+/* actual image element: cover the card */
+.hero-image .hero-img-el {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover; /* critical: fill and crop like manpower */
+  object-position: center;
+  border-radius: inherit;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+  transform: rotate(0.5deg);
+  transition: transform var(--ease), box-shadow var(--ease);
+  background-color: transparent;
+}
+
+/* hover reset */
+@media (hover: hover) {
+  .hero-image .hero-img-el:hover {
+    transform: rotate(0);
+    box-shadow: 0 36px 80px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* fallback block shown when image fails (keeps aesthetic) */
+.hero-image-fallback {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 10, 15, 0.6),
+    rgba(14, 25, 30, 0.8)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  gap: 12px;
+  box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.45),
+    0 20px 40px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+/* Hide fallback if the image successfully loads */
+.hero-image img[src] {
+  /* This rule doesn't detect loaded vs failed, but when the image loads,
+     it's above the fallback visually. We also add this to help maintain
+     accessibility and ensure fallback remains only visible on fail. */
+  position: relative;
+  z-index: 2;
+}
+
+/* subtle fallback text for accessibility (won't show if image loads) */
+.hero-fallback-text {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 600;
+  font-size: 1rem;
+  max-width: 80%;
+}
+
+/* ensure hero card scales for mobile */
+@media (max-width: 767px) {
+  .hero-image {
+    min-height: 260px;
+    border-radius: 14px;
+  }
+  .hero-image .hero-img-el {
+    transform: none;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* z-index safety: ensure text sits above image on the right column */
+.hero-text {
+  position: relative;
+  z-index: 3;
+}
+
+/* If you used a dark overlay on hero-section-bg, reduce opacity so image shows better */
+.hero-section-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 10, 0.18); /* lighter overlay — tweak if too dark */
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 0;
+}
+
+/* ensure the grid children stack correctly and the image column is left */
+.hero-grid > * {
+  position: relative;
+}
+
+/* small helper to visually debug a missing image during development:
+   (remove/comment out when not needed) */
+.hero-image.debug {
+  outline: 2px dashed rgba(255, 255, 255, 0.06);
+}
+
+/* text */
+.hero-title {
+  font-size: 2.2rem;
+  line-height: 1.03;
+  margin: 0 0 0.6rem 0;
+  font-weight: 800;
+  color: #fff;
+}
+@media (min-width: 1100px) {
+  .hero-title {
+    font-size: 2.6rem;
+  }
+}
+
+.lead {
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 1rem;
+  max-width: 56ch;
+  font-size: 1.05rem;
+}
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* hero CTA helpers */
+.btn-hero {
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 800;
+  display: inline-block;
+  text-align: center;
+}
+.btn-hero.primary {
+  background: linear-gradient(90deg, var(--teal), #059669);
+  color: #fff;
+  box-shadow: 0 18px 50px rgba(16, 185, 129, 0.12);
+}
+.btn-hero.sky {
+  background: linear-gradient(90deg, var(--sky), #0ea5e9);
+  color: #fff;
+  box-shadow: 0 18px 50px rgba(14, 165, 233, 0.12);
+}
+/* small, elegant secondary outline */
+.btn-outline {
+  background: #fff;
+  color: var(--bg-dark);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+/* trust chips inside hero (if used) */
+.hero-features {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.hero-features li {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* accessible focus ring */
+.hero-section-bg a:focus {
+  outline: 3px solid rgba(14, 165, 233, 0.14);
+  outline-offset: 3px;
+}
+
+/* -------------------- sections, utilities -------------------- */
+.section {
+  padding: 56px 0;
+}
+.section-white {
+  background: #fff;
+}
+.section-pale {
+  background: var(--section);
+}
+.eyebrow {
+  display: block;
+  color: var(--teal);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.center {
+  text-align: center;
+}
+.muted {
+  color: var(--muted);
+}
+.gradient {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* grid utilities */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+  align-items: center;
+}
+@media (min-width: 880px) {
+  .grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* about */
+.about-media img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+}
+.about-copy h2 {
+  font-size: 1.6rem;
+  margin: 8px 0 12px;
+}
+
+/* service cards */
+
+/* Premium Service Card Interaction */
+.service-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px 20px;
+  border: 1px solid #f1f5f9;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Add a thin top-border that appears on hover */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 4px;
+  background: var(--accent-gradient);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(14, 165, 233, 0.1);
+  border-color: #e2e8f0;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Icon Animation */
+.service-card .icon {
+  width: 48px;
+  height: 48px;
+  color: #0ea5e9;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .icon {
+  transform: scale(1.1) rotate(5deg);
+  color: #14b8a6;
+}
+
+.service-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.4;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+@media (min-width: 720px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Stats Counter Styling */
+.section-dark-stats {
+  background: #071021; /* Matches your footer/hero dark theme */
+  padding: 60px 0;
+  color: #fff;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid rgba(2, 6, 23, 0.04);
+  box-shadow: 0 8px 22px rgba(2, 6, 23, 0.04);
+  text-align: center;
+  transition: transform var(--ease), box-shadow var(--ease),
+    border-color var(--ease);
+}
+.service-card .icon {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+.service-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px rgba(14, 165, 233, 0.08);
+  border-color: rgba(14, 165, 233, 0.12);
+}
+
+.cta-wrap {
+  margin-top: 28px;
+}
+.btn-cta {
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  background: var(--accent-gradient);
+  color: #fff;
+  box-shadow: 0 14px 40px rgba(14, 165, 233, 0.12);
+  display: inline-block;
+}
+
+/* features */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+@media (min-width: 720px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .features-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.feature {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border-bottom: 4px solid rgba(0, 0, 0, 0.03);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.04);
+}
+.feature-icon {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  color: var(--sky);
+  margin-bottom: 10px;
+}
+
+/* -------------------- CLIENTS: scalable 40-logo grid -------------------- */
+.clients-section {
+  padding: 48px 0;
+}
+.clients-title {
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+.clients-sub {
+  margin-bottom: 18px;
+}
+
+/* layout: responsive density increases with width so 40 logos fit elegantly */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(1fr);
+  gap: 14px;
+  align-items: center;
+  justify-items: center;
+  margin-top: 18px;
+}
+@media (min-width: 560px) {
+  .logo-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 780px) {
+  .logo-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .logo-grid {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 18px;
+  }
+}
+@media (min-width: 1400px) {
+  .logo-grid {
+    grid-template-columns: repeat(10, 1fr);
+    gap: 20px;
+  }
+}
+
+/* logo item styling */
+.logo-item {
+  width: 100%; /* set any fixed width */
+  height: 120px; /* set any fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden; /* important so the image doesn't overflow */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), #fff);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.03);
+  border: 1px solid rgba(2, 6, 23, 0.04);
+}
+
+.logo-item img {
+  width: 72px;
+  height: auto;
+  object-fit: cover; /* makes the image fill the fixed space */
+  filter: grayscale(0.02);
+  opacity: 0.96;
+}
+
+@media (min-width: 1400px) {
+  .logo-item img {
+    max-width: 85%;
+  }
+}
+
+/* compact variant for footer/very dense rows */
+.logo-compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.logo-compact .logo-item {
+  padding: 6px;
+  border-radius: 6px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* -------------------- contact / form -------------------- */
+.card-block {
+  background: transparent;
+}
+.contact-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.contact-row a {
+  text-decoration: none;
+  color: rgb(8, 113, 226);
+}
+
+.mini-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--sky);
+  margin-top: 4px;
+}
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--sky);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+.form input,
+.form select {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(2, 6, 23, 0.04);
+  font-size: 1rem;
+}
+.form input:focus,
+.form select:focus {
+  outline: none;
+  box-shadow: 0 12px 40px rgba(14, 165, 233, 0.06);
+  border-color: var(--sky);
+}
+.submit-btn {
+  background: linear-gradient(90deg, var(--teal), var(--sky));
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: 0;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* FAQ Accordion Styling */
+.faq-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-icon {
+  color: var(--sky);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Toggle Class for JavaScript */
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding: 20px;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* small submission message */
+.submission {
+  font-weight: 600;
+}
+
+/* -------------------- footer -------------------- */
+.site-footer {
+  padding: 36px 0;
+  background: #071021;
+  color: white;
+  margin-top: 38px;
+}
+.site-footer a {
+  color: white;
+  text-decoration: none;
+}
+.site-footer p {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 880px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-links li {
+  margin-bottom: 8px;
+}
+.footer-links a {
+  color: white;
+}
+.copyright {
+  text-align: center;
+  color: white;
+  margin-top: 18px;
+  font-size: 0.93rem;
+}
+
+/* -------------------- animations & helpers -------------------- */
+/* fade-in and fade-in-scroll respect inline data-delay set in markup */
+.fade-in,
+.fade-in-scroll {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-in.is-visible,
+.fade-in-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* support for inline CSS --delay on nodes; add small JS to set transitionDelay if needed */
+
+/* utilities */
+.center {
+  text-align: center;
+}
+.rounded {
+  border-radius: 12px;
+}
+
+/* responsive tweaks */
+@media (max-width: 520px) {
+  .hero-title {
+    font-size: 1.6rem;
+  }
+  .lead {
+    font-size: 1rem;
+  }
+  .brand-main {
+    font-size: 1.05rem;
+  }
+  .brand-gradient {
+    font-size: 0.85rem;
+  }
+  .logo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* keyboard focus visibility */
+a:focus,
+button:focus,
+input:focus,
+select:focus {
+  outline: 3px solid rgba(14, 165, 233, 0.12);
+  outline-offset: 2px;
+}
+
+/* WhatsApp Floating Button Styling */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25d366; /* Official WhatsApp Green */
+  color: #fff !important;
+  border-radius: 50px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+  z-index: 9999;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.05) translateY(-5px);
+  background-color: #128c7e; /* Darker green on hover */
+}
+
+/* Mobile responsive: Hide text, keep only icon circle */
+@media (max-width: 768px) {
+  .wa-text {
+    display: none;
+  }
+  .whatsapp-float {
+    padding: 15px;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* End of stylesheet */
