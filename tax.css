@@ -29,7 +29,13 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
     Arial;
   color: var(--text);
   background: var(--bg);
@@ -141,7 +147,7 @@ img {
 .brand-gradient {
   font-size: 1rem;
   /* UPDATED: Use the defined theme colors for consistency */
-  background: var(--accent-gradient); 
+  background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 600;
@@ -168,7 +174,9 @@ img {
   padding: 0.55rem 0.95rem;
   border-radius: 10px;
   font-weight: 600;
-  transition: background 0.25s, transform 0.15s;
+  transition:
+    background 0.25s,
+    transform 0.15s;
 }
 .btn.btn-primary:hover {
   transform: translateY(-2px);
@@ -255,7 +263,9 @@ img {
   border-radius: inherit;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
   transform: rotate(0.5deg);
-  transition: transform var(--ease), box-shadow var(--ease);
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease);
   background-color: transparent;
 }
 
@@ -283,7 +293,8 @@ img {
   padding: 24px;
   text-align: center;
   gap: 12px;
-  box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.45),
+  box-shadow:
+    inset 0 2px 14px rgba(0, 0, 0, 0.45),
     0 20px 40px rgba(0, 0, 0, 0.45);
   pointer-events: none;
 }
@@ -498,7 +509,10 @@ img {
 .service-card::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 4px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
   background: var(--accent-gradient);
   transform: scaleX(0);
   transition: transform 0.3s ease;
@@ -602,7 +616,9 @@ img {
   border: 1px solid rgba(2, 6, 23, 0.04);
   box-shadow: 0 8px 22px rgba(2, 6, 23, 0.04);
   text-align: center;
-  transition: transform var(--ease), box-shadow var(--ease),
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease),
     border-color var(--ease);
 }
 .service-card .icon {
@@ -935,7 +951,9 @@ img {
 .fade-in-scroll {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
 }
 .fade-in.is-visible,
 .fade-in-scroll.is-visible {
@@ -997,7 +1015,9 @@ select:focus {
   z-index: 9999;
   font-weight: 700;
   font-size: 0.95rem;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .whatsapp-float:hover {
@@ -1050,7 +1070,9 @@ select:focus {
   text-align: center;
   border: 1px solid rgba(2, 6, 23, 0.05);
   box-shadow: 0 12px 30px rgba(2, 6, 23, 0.05);
-  transition: transform var(--ease), box-shadow var(--ease);
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease);
 }
 
 .exp-card:hover {
@@ -1097,7 +1119,6 @@ select:focus {
   line-height: 1.6;
 }
 
-
 /* -------------------- Testimonials Section -------------------- */
 
 .testimonials-section h2 {
@@ -1132,7 +1153,9 @@ select:focus {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform var(--ease), box-shadow var(--ease);
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease);
 }
 
 .testimonial-card:hover {
@@ -1173,7 +1196,5 @@ select:focus {
   font-size: 0.85rem;
   color: var(--muted);
 }
-
-
 
 /* End of stylesheet */
