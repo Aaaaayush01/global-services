@@ -643,7 +643,7 @@
         <div class="contact-form">
           <h3>Tell Us Your Requirement</h3>
 
-          <form id="taxForm" name="contact" method="POST" data-netlify="true" action="/thank-you.html"
+          <form name="contact" method="POST" data-netlify="true" action="/thank-you.html"
             netlify-honeypot="bot-field" class="form">
             <input type="hidden" name="form-name" value="contact" />
 
@@ -802,82 +802,72 @@
   </footer>
 
   <!-- Minimal JS: smooth anchors, fade-in, lucide init, form feedback -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // initialize lucide icons if present
-      if (typeof lucide !== "undefined") lucide.createIcons();
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 
-      // smooth anchor scrolling (unchanged)
-      document.querySelectorAll('a[href^="#"]').forEach((a) => {
-        a.addEventListener("click", (e) => {
-          const href = a.getAttribute("href");
-          if (href && href !== "#") {
-            e.preventDefault();
-            const el = document.querySelector(href);
-            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        });
-      });
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize lucide icons
+  if (window.lucide) lucide.createIcons();
 
-      // IntersectionObserver for both .fade-in and .fade-in-scroll
-      const fadeNodes = document.querySelectorAll(
-        ".fade-in, .fade-in-scroll",
-      );
-
-      const io = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              // prefer inline --delay value (CSS var) or data-delay
-              const inlineDelay = getComputedStyle(entry.target)
-                .getPropertyValue("--delay")
-                ?.trim();
-              const dataDelay = entry.target.getAttribute("data-delay");
-              const delay = inlineDelay || dataDelay || "0";
-              // normalize strings like "0.2s" or "0.2"
-              if (delay.endsWith("s")) {
-                entry.target.style.transitionDelay = delay;
-              } else if (delay !== "") {
-                entry.target.style.transitionDelay = parseFloat(delay) + "s";
-              }
-              entry.target.classList.add("is-visible");
-              obs.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.12 },
-      );
-
-      fadeNodes.forEach((n) => io.observe(n));
+  // Smooth anchor scrolling
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const href = a.getAttribute("href");
+      if (href && href !== "#") {
+        const el = document.querySelector(href);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
     });
+  });
 
-    document.querySelectorAll(".faq-question").forEach((button) => {
-      button.addEventListener("click", () => {
-        const item = button.parentElement;
-        item.classList.toggle("active");
+  // Fade-in animation observer
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay =
+            getComputedStyle(entry.target).getPropertyValue("--delay").trim() ||
+            entry.target.dataset.delay ||
+            "0s";
+
+          entry.target.style.transitionDelay =
+            delay.endsWith("s") ? delay : `${delay}s`;
+
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        }
       });
-    });
-  </script>
-  <a href="https://wa.me/917766911938?text=Hello%20Global%20Services,%20I%20have%20a%20query%20regarding%20Tax/Compliance."
-    class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-    <span data-lucide="message-circle"></span>
-    <span class="wa-text">Chat with us</span>
-  </a>
-  <script>
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
+    },
+    { threshold: 0.12 }
+  );
 
-    document.querySelectorAll(".fade-in, .fade-in-scroll")
-      .forEach(el => observer.observe(el));
-  </script>
+  document
+    .querySelectorAll(".fade-in, .fade-in-scroll")
+    .forEach((el) => observer.observe(el));
+
+  // FAQ toggle
+  document.querySelectorAll(".faq-question").forEach((button) => {
+    button.addEventListener("click", () => {
+      button.parentElement.classList.toggle("active");
+    });
+  });
+});
+</script>
+
+<!-- WhatsApp Floating Button -->
+<a
+  href="https://wa.me/917766911938?text=Hello%20Global%20Services,%20I%20have%20a%20query%20regarding%20Tax/Compliance."
+  class="whatsapp-float"
+  target="_blank"
+  aria-label="Chat on WhatsApp"
+>
+  <span data-lucide="message-circle"></span>
+  <span class="wa-text">Chat with us</span>
+</a>
+
 </body>
 
 </html>
